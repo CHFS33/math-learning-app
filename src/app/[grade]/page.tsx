@@ -18,6 +18,12 @@ import { ArrowRight, BookOpen, Hash, Shapes, Grid3X3 } from "lucide-react";
 
 import { use } from "react";
 
+export async function generateStaticParams() {
+    return curriculumData.map((grade) => ({
+        grade: grade.id,
+    }));
+}
+
 export default function GradePage({ params }: { params: Promise<{ grade: string }> }) {
     // Unwrap params using React.use() or await in async component
     // Since Next.js 15, params is a promise.

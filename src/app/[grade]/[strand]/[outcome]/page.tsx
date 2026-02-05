@@ -8,6 +8,18 @@ import { VisualCounter } from "@/components/activity/visual-counter";
 import { Quiz } from "@/components/activity/quiz";
 import { use } from "react";
 
+export async function generateStaticParams() {
+    return curriculumData.flatMap((grade) =>
+        grade.strands.flatMap((strand) =>
+            strand.outcomes.map((outcome) => ({
+                grade: grade.id,
+                strand: strand.id,
+                outcome: outcome.id,
+            }))
+        )
+    );
+}
+
 export default function OutcomePage({ params }: { params: Promise<{ grade: string; strand: string; outcome: string }> }) {
     const { grade: gradeId, strand: strandId, outcome: outcomeId } = use(params);
     const router = useRouter();
@@ -54,7 +66,7 @@ export default function OutcomePage({ params }: { params: Promise<{ grade: strin
                 {activity.type === 'visual-counter' && (
                     <VisualCounter
                         title={activity.title}
-                        rounds={activity.content.rounds || [{ target: activity.content.target || 3 }]}
+                        rounds={activity.content?.rounds || [{ target: activity.content?.target || 3 }]}
                         onComplete={() => router.back()}
                     />
                 )}
@@ -62,7 +74,7 @@ export default function OutcomePage({ params }: { params: Promise<{ grade: strin
                 {activity.type === 'quiz' && (
                     <Quiz
                         title={activity.title}
-                        questions={activity.content.questions || [{ question: activity.content.question, options: activity.content.options, answer: activity.content.answer }]}
+                        questions={activity.content?.questions || [{ question: activity.content?.question || '', options: activity.content?.options || [], answer: activity.content?.answer || '' }]}
                         onComplete={() => router.back()}
                     />
                 )}

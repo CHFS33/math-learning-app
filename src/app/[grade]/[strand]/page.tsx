@@ -5,6 +5,15 @@ import { cn } from "@/lib/utils";
 import { ChevronRight, CheckCircle2, Circle } from "lucide-react";
 import { use } from "react";
 
+export async function generateStaticParams() {
+    return curriculumData.flatMap((grade) =>
+        grade.strands.map((strand) => ({
+            grade: grade.id,
+            strand: strand.id,
+        }))
+    );
+}
+
 export default function StrandPage({ params }: { params: Promise<{ grade: string; strand: string }> }) {
     const { grade: gradeId, strand: strandId } = use(params);
 
