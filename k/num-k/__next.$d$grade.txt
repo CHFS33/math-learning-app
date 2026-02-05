@@ -1,0 +1,5 @@
+1:"$Sreact.fragment"
+2:I[2294,["/math-learning-app/_next/static/chunks/ed31de15a0bda8a6.js","/math-learning-app/_next/static/chunks/356804c3072bc204.js"],"AppSidebar"]
+3:I[39756,["/math-learning-app/_next/static/chunks/ff1a16fafef87110.js","/math-learning-app/_next/static/chunks/d2be314c3ece3fbe.js"],"default"]
+4:I[37457,["/math-learning-app/_next/static/chunks/ff1a16fafef87110.js","/math-learning-app/_next/static/chunks/d2be314c3ece3fbe.js"],"default"]
+0:{"buildId":"SxzYjJVMsmVYp04n18Omh","rsc":["$","$1","c",{"children":[[["$","script","script-0",{"src":"/math-learning-app/_next/static/chunks/ed31de15a0bda8a6.js","async":true}],["$","script","script-1",{"src":"/math-learning-app/_next/static/chunks/356804c3072bc204.js","async":true}]],["$","div",null,{"className":"flex min-h-screen bg-neutral-50 dark:bg-neutral-950","children":[["$","$L2",null,{}],["$","main",null,{"className":"ml-20 flex-1 p-8 transition-all md:ml-64","children":["$","$L3",null,{"parallelRouterKey":"children","template":["$","$L4",null,{}]}]}]]}]]}],"loading":null,"isPartial":false}
