@@ -69,7 +69,6 @@ export default function OutcomePage({ params }: { params: Promise<{ grade: strin
                     <VisualCounter
                         title={activity.title}
                         rounds={activity.content?.rounds || [{ target: activity.content?.target || 3 }]}
-                        onComplete={() => { }}
                     />
                 )}
 
@@ -77,7 +76,6 @@ export default function OutcomePage({ params }: { params: Promise<{ grade: strin
                     <Quiz
                         title={activity.title}
                         questions={activity.content?.questions || [{ question: activity.content?.question || '', options: activity.content?.options || [], answer: activity.content?.answer || '' }]}
-                        onComplete={() => { }}
                     />
                 )}
 
