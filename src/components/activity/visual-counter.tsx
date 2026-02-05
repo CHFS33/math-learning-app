@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { Cat, Dog, Fish, Rabbit, Bug, Bird } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -14,12 +15,13 @@ export interface CounterRound {
 interface VisualCounterProps {
     title: string;
     rounds: CounterRound[];
-    onComplete: () => void;
+    onComplete?: () => void;
 }
 
 const ICONS = [Cat, Dog, Fish, Rabbit, Bug, Bird];
 
 export function VisualCounter({ title, rounds, onComplete }: VisualCounterProps) {
+    const router = useRouter();
     const [currentRoundIndex, setCurrentRoundIndex] = useState(0);
     const [selectedNumber, setSelectedNumber] = useState<number | null>(null);
     const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
@@ -66,7 +68,7 @@ export function VisualCounter({ title, rounds, onComplete }: VisualCounterProps)
                     <Button onClick={() => window.location.reload()} variant="outline">
                         <RefreshCcw className="mr-2 h-4 w-4" /> Play Again
                     </Button>
-                    <Button onClick={onComplete}>
+                    <Button onClick={onComplete || (() => router.back())}>
                         Continue <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
                 </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { CheckCircle2, XCircle, ArrowRight, RefreshCcw } from "lucide-react";
@@ -16,10 +17,11 @@ export interface Question {
 interface QuizProps {
     title: string;
     questions: Question[];
-    onComplete: () => void;
+    onComplete?: () => void;
 }
 
 export function Quiz({ title, questions, onComplete }: QuizProps) {
+    const router = useRouter();
     const [currentIndex, setCurrentIndex] = useState(0);
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
@@ -61,7 +63,7 @@ export function Quiz({ title, questions, onComplete }: QuizProps) {
                     <Button onClick={() => window.location.reload()} variant="outline">
                         <RefreshCcw className="mr-2 h-4 w-4" /> Try Again
                     </Button>
-                    <Button onClick={onComplete}>
+                    <Button onClick={onComplete || (() => router.back())}>
                         Continue <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
                 </div>
