@@ -1,6 +1,5 @@
-"use client";
-
-import { notFound, useRouter } from "next/navigation";
+import { notFound } from "next/navigation";
+import Link from "next/link";
 import { curriculumData } from "@/data/curriculum";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft } from "lucide-react";
@@ -22,7 +21,6 @@ export async function generateStaticParams() {
 
 export default function OutcomePage({ params }: { params: Promise<{ grade: string; strand: string; outcome: string }> }) {
     const { grade: gradeId, strand: strandId, outcome: outcomeId } = use(params);
-    const router = useRouter();
 
     const grade = curriculumData.find((g) => g.id === gradeId);
     const strand = grade?.strands.find((s) => s.id === strandId);
@@ -40,7 +38,9 @@ export default function OutcomePage({ params }: { params: Promise<{ grade: strin
             <div className="flex h-64 flex-col items-center justify-center text-center">
                 <h2 className="text-xl font-semibold">No activities yet</h2>
                 <p className="text-neutral-500">Check back later!</p>
-                <Button onClick={() => router.back()} className="mt-4" variant="outline">Go Back</Button>
+                <Link href={`/${gradeId}/${strandId}`}>
+                    <Button className="mt-4" variant="outline">Go Back</Button>
+                </Link>
             </div>
         );
     }
@@ -51,9 +51,11 @@ export default function OutcomePage({ params }: { params: Promise<{ grade: strin
     return (
         <div className="mx-auto max-w-4xl space-y-8">
             <header className="flex items-center gap-4">
-                <Button variant="ghost" size="icon" onClick={() => router.back()}>
-                    <ChevronLeft className="h-4 w-4" />
-                </Button>
+                <Link href={`/${gradeId}/${strandId}`}>
+                    <Button variant="ghost" size="icon">
+                        <ChevronLeft className="h-4 w-4" />
+                    </Button>
+                </Link>
                 <div>
                     <h1 className="text-2xl font-bold tracking-tight text-neutral-900 dark:text-white">
                         {activity.title}
@@ -67,7 +69,7 @@ export default function OutcomePage({ params }: { params: Promise<{ grade: strin
                     <VisualCounter
                         title={activity.title}
                         rounds={activity.content?.rounds || [{ target: activity.content?.target || 3 }]}
-                        onComplete={() => router.back()}
+                        onComplete={() => { }}
                     />
                 )}
 
@@ -75,7 +77,7 @@ export default function OutcomePage({ params }: { params: Promise<{ grade: strin
                     <Quiz
                         title={activity.title}
                         questions={activity.content?.questions || [{ question: activity.content?.question || '', options: activity.content?.options || [], answer: activity.content?.answer || '' }]}
-                        onComplete={() => router.back()}
+                        onComplete={() => { }}
                     />
                 )}
 
